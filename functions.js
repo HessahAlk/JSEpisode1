@@ -5,6 +5,12 @@
  * - logs "Hello <name>" if there is a name
  */
 function greet(name) {
+  let message = "Hello";
+ if (name) {
+   message += ` ${name}`;
+ }
+
+ console.log(message);
   // Your code here
 }
 
@@ -14,6 +20,7 @@ function greet(name) {
  * - returns true if it's odd, false otherwise
  */
 function isOdd(n) {
+  return !!(n % 2)
   // Your code here
 }
 
@@ -29,6 +36,10 @@ function isOdd(n) {
  * Hint: you can solve this without writing any loops!
  */
 function oddsSmallerThan(n) {
+  if (isOdd(n)) {
+    n--;
+  }
+  return n / 2;
   // Your code here
 }
 
@@ -43,6 +54,12 @@ function oddsSmallerThan(n) {
  * squareOrDouble(9) -> 81
  */
 function squareOrDouble(n) {
+  if (isOdd(n)) {
+    return n * n;
+  }
+  else {
+    return n * 2;
+  }
   // Your code here
 }
 
@@ -64,8 +81,23 @@ function squareOrDouble(n) {
  *    ageFromCivilID(297111012345) -> 20
  */
 function ageFromCivilID(civilID) {
-  // Your code here
+
+  const year = +civilID[0] + 17 + civilID[1] + civilID[2];
+  const month = civilID[3] + civilID[4];
+  const day = civilID[5] + civilID[6];
+
+  const today = new Date();
+  const dob = new Date(`${month}/${day}/${year}`);
+
+  let age = today.getFullYear() - dob.getFullYear();
+
+  if (dob.getMonth() > today.getMonth()) {
+    age--;
+  }
+
+  return age;
 }
+
 
 /**
  * canVoteInKuwait(civilID, isKuwaiti, isRoyal):
@@ -79,6 +111,7 @@ function ageFromCivilID(civilID) {
  *    - Is NOT a member of the royal family
  */
 function canVoteInKuwait(civilID, isKuwaiti, isRoyal) {
+  return ageFromCivilID(civilID) > 20 && isKuwaiti && !isRoyal;
   // Your code here
 }
 
